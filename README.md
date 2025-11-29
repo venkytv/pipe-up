@@ -30,9 +30,29 @@ LISTEN_ADDR=127.0.0.1:4410 \
 
 ## Build & Run
 - Default build: `make build` (CGO disabled). Binary at `bin/tts-cached`.
-- Cross-build arm64: `make build-linux-arm64` (CGO disabled).
+- Client CLI: `make build-cli` -> `bin/tts-submit`.
+- Cross-build arm64: `make build-linux-arm64` / `make build-cli-linux-arm64` (CGO disabled).
 - Run locally: `./bin/tts-cached -piper-model /path/to/model.onnx`.
 - Tests: `make test`.
+
+## CLI Helper (pipe-up)
+`pipe-up` sends text to the `/tts` endpoint.
+
+```bash
+# Text as args
+bin/pipe-up "hello world"
+
+# From file
+bin/pipe-up -file ./input.txt   # or -f
+
+# From stdin
+echo "from stdin" | bin/pipe-up -file -
+
+# Point at a different server
+bin/pipe-up -server http://127.0.0.1:4410/tts "text"
+# or set TTS_CACHED_URL
+TTS_CACHED_URL=http://127.0.0.1:4410/tts bin/pipe-up "text"
+```
 
 ## HTTP Usage
 ```bash
