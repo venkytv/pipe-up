@@ -36,6 +36,14 @@ func ResolveText(filePath string, args []string, stdin io.Reader) (string, error
 		return normalize(strings.Join(args, " "))
 	}
 
+	if stdin != nil {
+		b, err := io.ReadAll(stdin)
+		if err != nil {
+			return "", err
+		}
+		return normalize(string(b))
+	}
+
 	return "", errors.New("no input provided")
 }
 

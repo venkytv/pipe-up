@@ -44,6 +44,17 @@ func TestResolveTextFromStdin(t *testing.T) {
 	}
 }
 
+func TestResolveTextFromStdinDefault(t *testing.T) {
+	stdin := bytes.NewBufferString("fallback stdin")
+	text, err := ResolveText("", nil, stdin)
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+	if text != "fallback stdin" {
+		t.Fatalf("unexpected text: %q", text)
+	}
+}
+
 func TestResolveTextEmpty(t *testing.T) {
 	if _, err := ResolveText("", nil, nil); err == nil {
 		t.Fatalf("expected error for empty input")
