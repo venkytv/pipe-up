@@ -1,4 +1,4 @@
-# tts-cached
+# pipe-up
 
 Generic caching front-end for the Piper CLI TTS engine. Accepts text over HTTP, normalizes and hashes it (with voice ID), caches WAV outputs on disk, enforces a size cap with LRU eviction, plays audio asynchronously, and gracefully shuts down on signals.
 
